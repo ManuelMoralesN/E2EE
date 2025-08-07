@@ -27,6 +27,15 @@
     <ClCompile Include="src\NetworkHelpercpp.cpp">
       <Filter>Source</Filter>
     </ClCompile>
+    <ClCompile Include="src\Client.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\CryptoHelper.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Server.cpp">
+      <Filter>Source</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Server.h">
@@ -39,6 +48,9 @@
       <Filter>Include</Filter>
     </ClInclude>
     <ClInclude Include="include\CryptoHelper.h">
+      <Filter>Include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Client.h">
       <Filter>Include</Filter>
     </ClInclude>
   </ItemGroup>
