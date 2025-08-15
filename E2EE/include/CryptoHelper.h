@@ -13,21 +13,21 @@ public:
 	* @brief Genera un nuevo par de claves RSA de 2048 bits.
 	*/
 	void
-		GenerateRSAKeys();
+	GenerateRSAKeys();
 
 
 	/**
 	 * @brief Devuelve la clave pública en formato PEM (como string).
 	 */
 	std::string
-		GetPublicKeyString() const;
+	GetPublicKeyString() const;
 
 
 	/**
 	 * @brief Carga la clave pública del peer desde un string PEM.
 	 */
 	void
-		LoadPeerPublicKey(const std::string& pemKey);
+	LoadPeerPublicKey(const std::string& pemKey);
 
 	// AES
 
@@ -35,19 +35,19 @@ public:
 	 * @brief Genera una clave AES-256 (32 bytes aleatorios).
 	 */
 	void
-		GenerateAESKey();
+	GenerateAESKey();
 
 	/**
 	 * @brief Cifra la clave AES con la clave pública del peer usando RSA.
 	 */
 	std::vector<unsigned char>
-		EncryptAESKeyWithPeer();
+	EncryptAESKeyWithPeer();
 
 	/**
 	 * @brief Descifra la clave AES enviada por el cliente.
 	 */
 	void
-		DecryptAESKey(const std::vector<unsigned char>& encryptedKey);
+	DecryptAESKey(const std::vector<unsigned char>& encryptedKey);
 
 	/**
 	 * @brief Cifra un mensaje usando AES-256 en modo CBC.
@@ -56,7 +56,7 @@ public:
 	 * @return El texto cifrado como vector de bytes.
 	   */
 	std::vector<unsigned char>
-		AESEncrypt(const std::string& plaintext, std::vector<unsigned char>& outIV);
+	AESEncrypt(const std::string& plaintext, std::vector<unsigned char>& outIV);
 
 	/**
 	 * @brief Descifra un mensaje cifrado con AES-256-CBC.
@@ -65,8 +65,8 @@ public:
 	 * @return Texto original.
 	 */
 	std::string
-		AESDecrypt(const std::vector<unsigned char>& ciphertext,
-			const std::vector<unsigned char>& iv);
+	AESDecrypt(const std::vector<unsigned char>& ciphertext,
+			   const std::vector<unsigned char>& iv);
 
 private:
 	RSA* rsaKeyPair;        // Par de claves propia

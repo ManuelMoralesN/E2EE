@@ -20,7 +20,7 @@ Client::Connect() {
 	bool connected = m_net.ConnectToServer(m_ip, m_port);
 	if (connected) {
 		m_serverSock = m_net.m_serverSocket; // Guardar el socket una vez conectado
-		std::cout << "[Client] Conexión establecida.\n";
+		std::cout << "[Client] Conexion establecida.\n";
 	}
 	else {
 		std::cerr << "[Client] Error al conectar.\n";
@@ -33,12 +33,12 @@ Client::ExchangeKeys() {
 	// 1. Recibe la clave pública del servidor
 	std::string serverPubKey = m_net.ReceiveData(m_serverSock);
 	m_crypto.LoadPeerPublicKey(serverPubKey);
-	std::cout << "[Client] Clave pública del servidor recibida.\n";
+	std::cout << "[Client] Clave publica del servidor recibida.\n";
 
 	// 2. Envía la clave pública del cliente
 	std::string clientPubKey = m_crypto.GetPublicKeyString();
 	m_net.SendData(m_serverSock, clientPubKey);
-	std::cout << "[Client] Clave pública del cliente enviada.\n";
+	std::cout << "[Client] Clave publica del cliente enviada.\n";
 }
 
 void
@@ -96,7 +96,7 @@ Client::StartReceiveLoop() {
 		// 1) IV (16 bytes)
 		auto iv = m_net.ReceiveDataBinary(m_serverSock, 16);
 		if (iv.empty()) {
-			std::cout << "\n[Client] Conexión cerrada por el servidor.\n";
+			std::cout << "\n[Client] Conexion cerrada por el servidor.\n";
 			break;
 		}
 

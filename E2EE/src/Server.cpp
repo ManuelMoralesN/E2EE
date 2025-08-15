@@ -20,7 +20,7 @@ bool Server::Start() {
 
 
 void Server::WaitForClient() {
-	std::cout << "[Server] Esperando conexión de un cliente...\n";
+	std::cout << "[Server] Esperando conexion de un cliente...\n";
 
 	// Aceptar conexión entrante
 	m_clientSock = m_net.AcceptClient();
@@ -65,7 +65,7 @@ void Server::StartReceiveLoop() {
 		// 1) IV (16)
 		auto iv = m_net.ReceiveDataBinary(m_clientSock, 16);
 		if (iv.empty()) {
-			std::cout << "\n[Server] Conexión cerrada por el cliente.\n";
+			std::cout << "\n[Server] Conexion cerrada por el cliente.\n";
 			break;
 		}
 

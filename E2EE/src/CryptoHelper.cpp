@@ -4,7 +4,7 @@
 #include "openssl/err.h"
 #include "openssl/evp.h"
 
-
+// Constructor y destructor
 CryptoHelper::CryptoHelper() :rsaKeyPair(nullptr), peerPublicKey(nullptr) {
 	std::memset(&aesKey, 0, sizeof(aesKey));
 }
@@ -18,6 +18,7 @@ CryptoHelper::~CryptoHelper() {
 	}
 }
 
+// Generación de claves RSA
 void
 CryptoHelper::GenerateRSAKeys() {
 	BIGNUM* bn = BN_new();
@@ -27,6 +28,7 @@ CryptoHelper::GenerateRSAKeys() {
 	BN_free(bn);
 }
 
+// Devuelve la clave pública en formato PEM
 std::string
 CryptoHelper::GetPublicKeyString() const {
 	BIO* bio = BIO_new(BIO_s_mem());
@@ -38,6 +40,7 @@ CryptoHelper::GetPublicKeyString() const {
 	return publicKey;
 }
 
+// Carga la clave pública del peer desde un string PEM
 void
 CryptoHelper::LoadPeerPublicKey(const std::string& pemKey) {
 	BIO* bio = BIO_new_mem_buf(pemKey.data(), static_cast<int>(pemKey.size()));
@@ -49,11 +52,13 @@ CryptoHelper::LoadPeerPublicKey(const std::string& pemKey) {
 	}
 }
 
+// Generación de clave AES
 void
 CryptoHelper::GenerateAESKey() {
 	RAND_bytes(aesKey, sizeof(aesKey));
 }
 
+// Cifra la clave AES con la clave pública del peer usando RSA
 std::vector<unsigned char>
 CryptoHelper::EncryptAESKeyWithPeer() {
 	if (!peerPublicKey) {
@@ -70,6 +75,7 @@ CryptoHelper::EncryptAESKeyWithPeer() {
 	return encryptedKey;
 }
 
+// Descifra la clave AES enviada por el cliente
 void
 CryptoHelper::DecryptAESKey(const std::vector<unsigned char>& encryptedKey) {
 	RSA_private_decrypt(encryptedKey.size(),
@@ -79,6 +85,7 @@ CryptoHelper::DecryptAESKey(const std::vector<unsigned char>& encryptedKey) {
 		RSA_PKCS1_OAEP_PADDING);
 }
 
+// Cifra un mensaje usando AES-256 en modo CBC
 std::vector<unsigned char>
 CryptoHelper::AESEncrypt(const std::string& plaintext,
 	std::vector<unsigned char>& outIV) {
@@ -103,6 +110,7 @@ CryptoHelper::AESEncrypt(const std::string& plaintext,
 	return out;
 }
 
+// Descifra un mensaje cifrado con AES-256-CBC
 std::string
 CryptoHelper::AESDecrypt(const std::vector<unsigned char>& ciphertext,
 	const std::vector<unsigned char>& iv) {
